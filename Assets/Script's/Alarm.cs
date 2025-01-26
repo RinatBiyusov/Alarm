@@ -42,7 +42,7 @@ public class Alarm : MonoBehaviour
         if (_soundCoroutine != null)
             StopCoroutine(_soundCoroutine);
 
-        StartCoroutine(VolumeDown());
+        _soundCoroutine = StartCoroutine(VolumeDown());
     }
 
     private IEnumerator VolumeUp()
@@ -54,7 +54,7 @@ public class Alarm : MonoBehaviour
         while (_source.volume != _maxVolume)
         {
             _source.volume = Mathf.MoveTowards(_source.volume, _maxVolume, _volumeRate * Time.deltaTime);
-            Debug.Log(_source.volume);
+
             yield return null;
         }
     }
@@ -64,7 +64,7 @@ public class Alarm : MonoBehaviour
         while (_source.volume != 0)
         {
             _source.volume = Mathf.MoveTowards(_source.volume, 0, _volumeRate * Time.deltaTime);
-            Debug.Log(_source.volume);
+
             yield return null;
         }
     }

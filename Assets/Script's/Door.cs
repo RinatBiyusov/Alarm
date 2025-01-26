@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    //[SerializeField] private Alarm _alarm;
-
     public event Action Entered;
     public event Action Exited;
 
