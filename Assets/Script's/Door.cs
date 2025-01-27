@@ -3,20 +3,30 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public event Action Entered;
-    public event Action Exited;
+    public event Action<bool> Entered;
+    public event Action<bool> Exited;
+
+    private bool _hasEntered = false;
 
     private void OnTriggerEnter(Collider thief)
     {
-        Entered?.Invoke();
+        if (thief.GetComponent<Thief>())
+        {
+            _hasEntered = true;
+            Entered?.Invoke(_hasEntered);
 
-        thief.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            thief.GetComponent<MeshRenderer>().material.color = Color.red;
+        }
     }
 
     private void OnTriggerExit(Collider thief)
     {
-        Exited?.Invoke();
+        if (thief.GetComponent<Thief>())
+        {
+            _hasEntered = false;
+            Exited?.Invoke(_hasEntered);
 
-        thief.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+            thief.GetComponent<MeshRenderer>().material.color = Color.white;
+        }
     }
 }

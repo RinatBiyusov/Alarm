@@ -14,8 +14,8 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
-        Vector3 movement = new Vector3(_inputManager.HorizontalInput, 0f, _inputManager.VerticalInput);
+        Vector3 direction = new Vector3(_inputManager.HorizontalInput, 0f, _inputManager.VerticalInput);
 
-        transform.Translate(movement * _speed * Time.deltaTime, Space.World);
+        transform.Translate(direction * _speed * Time.deltaTime, Space.World);
     }
 }
